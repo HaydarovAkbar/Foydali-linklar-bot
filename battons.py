@@ -1,7 +1,7 @@
 from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 from connect import Database
 
-Token = "2033346371:AAHr_v7iPC-3xjuZSTBhAnpL50leIgB7Dn8"
+Token = "2033346371:AAHr_v7iPC-3xjuZSTBhAnpL50leIgB7D8"
 web, bot, kanal, boshqa, haqida, add = "🌏 Web sayt linklari♻️", "🌏 Bot linklari♻️", "🌏 Kanal linklari♻️", "🌏 Boshqa linklari♻️", "🤖 Bot haqida 📝", "Qo'shish"
 menu = ReplyKeyboardMarkup([
     [web, kanal],
@@ -51,13 +51,13 @@ reklama_admin = ReplyKeyboardMarkup([
     ["🏞 Photo", "Menyu"]
 ], resize_keyboard=True)
 admins_key = ReplyKeyboardMarkup([
-    ["Add link", "Delete link"],
-    ["Add reklama", "Users", "Add admin"],
+    ["Ad link", "Delete link"],
+    ["Ad reklama", "Users", "Add admin"],
     ["Admins", "Menyu"]
 ], resize_keyboard=True)
 
 category_key = ReplyKeyboardMarkup([
-    ["🌏WebSayt qo'shish", "🌏Kanal qo'shish"],
-    ["🌏Bot qo'shish", "🌏Boshqa link"],
+    ["🌏WebSayt qo'shish ", "🌏Kanal qo'shish "],
+    ["🌏Bot qo'shish ", "🌏Boshqa link "],
     ["Menyu"]
 ], resize_keyboard=True)
