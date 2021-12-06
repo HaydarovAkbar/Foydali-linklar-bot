@@ -1,7 +1,7 @@
 from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 from connect import Database
 
-Token = "2033346371:AAHr_v7iPC-xjuZSTBhAnpL50leIgB7D8"
+Token = "Token"
 web, bot, kanal, boshqa, haqida, add = "🌏 Web sayt linklari♻️", "🌏 Bot linklari♻️", "🌏 Kanal linklari♻️", "🌏 Boshqa linklari♻️", "🤖 Bot haqida 📝", "Qo'shish"
 menu = ReplyKeyboardMarkup([
     [web, kanal],
