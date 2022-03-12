@@ -1,12 +1,13 @@
 from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 from connect import Database
 
-Token = "5273187306:AAEhE6jKkw9a0Kx-MYXYVXhkTefMkz7HKCI"
+Token = "1982825247:AAHZtL5XKfS9FTXBfUm5CS_IbG0Rq4S0Zfc"
 
 web, bot, kanal, boshqa, haqida, add = "🌏 Web sayt linklari♻️", "🌏 Bot linklari♻️", "🌏 Kanal linklari♻️", "🌏 Boshqa linklari♻️", "🤖 Bot haqida 📝", "Qo'shish"
 add_link_txt, del_link, add_rek, users,add_admin_txt = "➕ Add link", "🪓 Delete link", "✖️ Add reklama","🚹 Users","🛂 Add admin"
 admins, menyu = "🛗 Admins", "🌐 Menyu"
 add_web_sayt,add_channel,add_bot, add_other_link = "🌏WebSayt qo'shish","🌏Kanal qo'shish","🌏Bot qo'shish","🌏Boshqa link"
+full_join_link = '©️ Tayyor link 🔵'
 
 menu = ReplyKeyboardMarkup([
     [web, kanal],
@@ -85,7 +86,7 @@ reklama_admin = ReplyKeyboardMarkup([
     ["🏞 Photo", "Menyu"]
 ], resize_keyboard=True)
 admins_key = ReplyKeyboardMarkup([
-    [add_link_txt, del_link],
+    [add_link_txt,full_join_link, del_link],
     [add_rek , users, add_admin_txt],
     [admins, menyu]
 ], resize_keyboard=True)
@@ -96,4 +97,11 @@ category_key = ReplyKeyboardMarkup([
     [menyu]],
     resize_keyboard=True)
 
-
+def all_category_by_link():
+    batton = InlineKeyboardMarkup([
+        [InlineKeyboardButton(add_web_sayt,callback_data=1),
+         InlineKeyboardButton(add_bot,callback_data=3),],
+        [InlineKeyboardButton(add_channel,callback_data=2),
+         InlineKeyboardButton(add_other_link,callback_data=4),]
+    ])
+    return batton

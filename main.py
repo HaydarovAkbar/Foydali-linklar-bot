@@ -1,6 +1,7 @@
 from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters, CallbackQueryHandler
 from methods import *
 from battons import *
+from insert_link import *
 
 updater = Updater(Token, use_context=True)
 dispatcher = updater.dispatcher
@@ -28,6 +29,7 @@ all_handler = ConversationHandler(
             MessageHandler(Filters.regex('^(' + haqida + ')$'), battons5),
             MessageHandler(Filters.regex('^(' + add + ')$'), battons6),
             MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
+            MessageHandler(Filters.regex('^(' + full_join_link + ')$'), get_insert_full_link),
         ],
         # bu Admin yoki user qushish funskiyasiga kirganda ishlidigan methodlar!
         2: [CommandHandler('start', start),
@@ -38,6 +40,7 @@ all_handler = ConversationHandler(
             MessageHandler(Filters.regex('^(' + add_other_link + ')$'), category_boshqa),
             MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
             MessageHandler(Filters.regex('^(' + del_link + ')$'), add_delete_linkID),
+            MessageHandler(Filters.regex('^(' + full_join_link + ')$'), get_insert_full_link),
             MessageHandler(Filters.regex('^(' + add_link_txt + ')$'), add_link),
             MessageHandler(Filters.regex('^(' + add_rek + ')$'), reklama),
             MessageHandler(Filters.regex('^(' + add_admin_txt + ')$'), add_admin),
@@ -85,6 +88,16 @@ all_handler = ConversationHandler(
              CallbackQueryHandler(inline_funcion_search),
              MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
              MessageHandler(Filters.text, fallback_text)
+             ],
+        50: [CommandHandler('start', start),
+             CommandHandler('developer', developer),
+             MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
+             CallbackQueryHandler(get_category_by_link),
+             ],
+        51: [CommandHandler('start', start),
+             CommandHandler('developer', developer),
+             MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
+             MessageHandler(Filters.photo, insert_full_link)
              ],
     },
     fallbacks=[CommandHandler('start', start),
