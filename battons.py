@@ -1,12 +1,8 @@
 from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 from connect import Database
 
-<<<<<<< HEAD
-Token = "1982825247:AAHZtL5XKfS9FTXBfUm5CS_IbG0Rq4S0Zfc"
+Token = "5273187306:AAEhE6jKkw9a0Kx-MYXYVXhkTefMkz7HKCI"
 
-=======
-Token = "Token"
->>>>>>> c9600950de62b412c5b2c0828f10ed33a5066fc4
 web, bot, kanal, boshqa, haqida, add = "🌏 Web sayt linklari♻️", "🌏 Bot linklari♻️", "🌏 Kanal linklari♻️", "🌏 Boshqa linklari♻️", "🤖 Bot haqida 📝", "Qo'shish"
 add_link_txt, del_link, add_rek, users,add_admin_txt = "➕ Add link", "🪓 Delete link", "✖️ Add reklama","🚹 Users","🛂 Add admin"
 admins, menyu = "🛗 Admins", "🌐 Menyu"
@@ -89,7 +85,6 @@ reklama_admin = ReplyKeyboardMarkup([
     ["🏞 Photo", "Menyu"]
 ], resize_keyboard=True)
 admins_key = ReplyKeyboardMarkup([
-<<<<<<< HEAD
     [add_link_txt, del_link],
     [add_rek , users, add_admin_txt],
     [admins, menyu]
@@ -98,17 +93,7 @@ admins_key = ReplyKeyboardMarkup([
 category_key = ReplyKeyboardMarkup([
     [add_web_sayt,add_channel ],
     [add_bot, add_other_link],
-    [menyu]
-=======
-    ["Ad link", "Delete link"],
-    ["Ad reklama", "Users", "Add admin"],
-    ["Admins", "Menyu"]
-], resize_keyboard=True)
+    [menyu]],
+    resize_keyboard=True)
 
-category_key = ReplyKeyboardMarkup([
-    ["🌏WebSayt qo'shish ", "🌏Kanal qo'shish "],
-    ["🌏Bot qo'shish ", "🌏Boshqa link "],
-    ["Menyu"]
->>>>>>> c9600950de62b412c5b2c0828f10ed33a5066fc4
-], resize_keyboard=True)
 
