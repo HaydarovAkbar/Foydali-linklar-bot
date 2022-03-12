@@ -1,6 +1,7 @@
 from battons import *
 from connect import Database
 from datetime import datetime
+from datetime import timedelta
 import time
 
 date = "20:10:2021"
@@ -422,8 +423,8 @@ def link_func(update, context):
 def photo_func(update, context):
     photo = update.message.photo[0]["file_id"]
     user = update.message.chat.id
-    t = datetime.now()
-    time = str(t)
+    t = datetime.now() + timedelta(hours=5)
+    time = t.strftime("%Y-%m-%d %H:%M")
     a = database.set_link(user_auto[2], photo, user_auto[3], user, time, user_auto[1], user_auto[0])
     if a:
         context.bot.send_message(chat_id=update.effective_chat.id,
@@ -481,9 +482,7 @@ def get_new_adminID(update, context):
 def get_new_admin_username(update, context):
     try:
         admin_list.append(update.message.text)
-        print(admin_list)
         A = database.add_admin(admin_list[0], admin_list[1], admin_list[2])
-        print(A)
         if A:
             context.bot.send_message(chat_id=update.effective_chat.id, text="Yangi admin Muvafaqiyatli qo'shildi:)!")
         else:

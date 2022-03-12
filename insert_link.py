@@ -3,6 +3,7 @@ from telegram import Update
 from connect import Database
 from battons import about,all_category_by_link
 from datetime import datetime
+from datetime import timedelta
 
 database = Database()
 bot_data = {}
@@ -29,9 +30,9 @@ def get_category_by_link(update:Update, context:CallbackContext):
 def insert_full_link(update:Update, context:CallbackContext):
     photo = update.message.photo[0]['file_id']
     chat_id = update.effective_chat.id
-    now = datetime.now().strftime('%Y-%m-%d %H:%M')
+    t = datetime.now() + timedelta(hours=5)
+    now = t.strftime("%Y-%m-%d %H:%M")
     discription = update.message.caption
     name, text, link = discription.split('$')
     A = database.set_link(text,photo,link,chat_id,now,name,bot_data[chat_id])
-    print(A)
     return 2
