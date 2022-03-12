@@ -21,6 +21,7 @@ def start(update, context):
                                   f'<i>Endi sizga kerakli barcha\n✅<b>Web saytlar\n✅Kanal,Gruppalar\n✅Botlar\n♻️ Va Boshqa kerakli linklarni</b>\n'
                                   f"Bir botdan topishingiz mumkin</i>!\n"
                                   f"Va o'zingizni linklaringizni qo'shishingiz mumkin!😎\n\n"
+                                  f"🗒Botni ishlatish bo'yicha qo'llanmani ko'rish 👉@kerakli_linklar_kanal\n\n"
                                   f"Qidirayotgan link nomini yoki unda qatnashgan so'zni yuboring!",
                              parse_mode="HTML",
                              reply_markup=menu)
@@ -29,15 +30,12 @@ def start(update, context):
     return 1
 
 
-# def battons1(update, context):
-#     context.bot.send_message(chat_id=update.effective_chat.id,
-#                              text=f"Bu yerda foydali web saytlar linklari",
-#                              reply_markup=category_battons(1))
-#     return 1
-
 def battons1(update, context):
     global cat_list
+    global music_start
     cat_list.clear()
+    music_start.clear()
+    music_start.append(0)
     cat_list.append(1)
     if not test(music_start[-1], cat_list[-1])[1]:
         context.bot.send_message(chat_id=update.effective_chat.id,
@@ -51,8 +49,11 @@ def battons1(update, context):
 
 def battons2(update, context):
     global cat_list
+    global music_start
     cat_list.clear()
     cat_list.append(2)
+    music_start.clear()
+    music_start.append(0)
     if not test(music_start[-1], cat_list[-1])[1]:
         context.bot.send_message(chat_id=update.effective_chat.id,
                                  text="Malumotlar bush")
@@ -65,8 +66,11 @@ def battons2(update, context):
 
 def battons3(update, context):
     global cat_list
+    global music_start
     cat_list.clear()
     cat_list.append(3)
+    music_start.clear()
+    music_start.append(0)
     if not test(music_start[-1], cat_list[-1])[1]:
         context.bot.send_message(chat_id=update.effective_chat.id,
                                  text="Malumotlar bush")
@@ -79,8 +83,11 @@ def battons3(update, context):
 
 def battons4(update, context):
     global cat_list
+    global music_start
     cat_list.clear()
     cat_list.append(4)
+    music_start.clear()
+    music_start.append(0)
     if not test(music_start[-1], cat_list[-1])[1]:
         context.bot.send_message(chat_id=update.effective_chat.id,
                                  text="Malumotlar bush")
@@ -124,7 +131,8 @@ def add_link(update, context):
                              text="Siz qo'shayotgan ma'lumotlar <b>Ishonchli va to'liq</b> "
                                   "bo'lishini so'rab qolamiz aks holda qo'shgan ma'lumotlaringiz Adminlar "
                                   "tominidan o'chirilishi mumkin👮‍♀️"
-                                  "\n\n<b><u>Qaysi Kategoriyadagi link qo'shmoqchisiz mumkin</u></b>:",
+                                  "\nQo'shish bo'yicha qo'llanma ushbu Kanalda berib o'tilgan 👉@kerakli_linklar_kanal"
+                                  "\n\n<b><u>Qaysi Kategoriyadagi link qo'shmoqchisiz Tanlang</u></b>:",
                              parse_mode="HTML",
                              reply_markup=category_key)
     user_auto.clear()
@@ -186,7 +194,7 @@ def rek(update, context):
         s = 0
         for item in database.get_id():
             try:
-                context.bot.send_message(chat_id=item[0], text=text)
+                context.bot.send_message(chat_id=item[0], text=text + "\n\n    @kerakli_linklar_bot")
                 s += 1
             except Exception as e:
                 print(e)
@@ -220,7 +228,7 @@ def rek_photo(update, context):
                 try:
                     context.bot.send_photo(chat_id=item[0],
                                            photo=photo,
-                                           caption=caption,
+                                           caption=caption + "\n\n    @kerakli_linklar_bot",
                                            disable_notification=True)
                     s += 1
                 except Exception as e:
@@ -259,7 +267,7 @@ def rek_video(update, context):
                 try:
                     context.bot.send_video(chat_id=item[0],
                                            video=video,
-                                           caption=text,
+                                           caption=text + "\n\n    @kerakli_linklar_bot",
                                            disable_notification=True)
                     s += 1
                 except Exception as e:
@@ -333,7 +341,7 @@ def inline_funcion(update, context):
             i = database.getID_link(int(query.data))
             context.bot.send_photo(chat_id=update.effective_chat.id,
                                    photo=i[2],
-                                   caption=f"""{i[0]}). <b>{i[6]}</b>\n\n<i>{i[1]}</i>\n\n<b>Link qo'shilgan vaqt</b>: {i[5][:16]}\n\n<b><u>Link</u></b>: {i[3]}\n\n      @kerakli_linklar_bot""",
+                                   caption=f"""{i[0]}). <b>{i[6]}</b>\n\n<i>{i[1]}</i>\n\n<b><u>Link: 👉 </u></b>{i[3]}\n\n      @kerakli_linklar_bot""",
                                    disable_notification=True,
                                    parse_mode="HTML", )
             return 1
@@ -405,7 +413,7 @@ def link_func(update, context):
     link = update.message.text
     user_auto.append(link)
     context.bot.send_message(chat_id=update.effective_chat.id,
-                             text="<b><u>Kanal,WebSayt,Bot yoki malumotingiz</u></b> aks etgan rasm kiritishing!",
+                             text="<b><u>Kanal,WebSayt,Bot yoki malumotingiz</u></b> aks etgan rasm kiritishingiz mumkin!",
                              parse_mode="HTML",
                              reply_markup=about)
     return 6
@@ -499,19 +507,65 @@ def admin_lists(update, context):
         print(e)
 
 
+music_start_search = [0]
+textlar = [""]
+def inline_funcion_search(update, context):
+    try:
+        query = update.callback_query
+        global music_start_search
+        global textlar
+        text = textlar[-1]
+        d = database.get_link_text(text)
+        if query.data == "chapga":
+            if music_start_search[-1] == 0:
+                return sub_message_delete(update, context)
+            else:
+                mus = music_start_search[-1]
+                music_start_search.append(mus - 10)
+                a = test_0(music_start_search[-1],d)
+                query.edit_message_text(text=a[1], reply_markup=a[0])
+        elif query.data == "delete":
+            query.delete_message(timeout=15)
+            return 1
+        elif query.data == "ungga":
+            mus = music_start_search[-1]
+            mus += 10
+            music_start_search.append(mus)
+            a = test_0(music_start_search[-1],d)
+            if not a:
+                mus = music_start_search[-1]
+                music_start_search.append(mus - 10)
+                return add_message_delete(update, context)
+            query.edit_message_text(text=a[1], reply_markup=a[0])
+        else:
+            query.edit_message_text(text="✅")
+            i = database.getID_link(int(query.data))
+            context.bot.send_photo(chat_id=update.effective_chat.id,
+                                   photo=i[2],
+                                   caption=f"""{i[0]}). <b>{i[6]}</b>\n\n<i>{i[1]}</i>\n\n<b><u>Link:</u></b> 👉 {i[3]}\n\n      @kerakli_linklar_bot""",
+                                   disable_notification=True,
+                                   parse_mode="HTML", )
+            textlar = []
+            music_start_search = [0]
+            return 1
+    except Exception as e:
+        return 1
+
 def fallback_text(update, context):
+    global textlar
+    global music_start_search
     try:
         text = update.message.text
         data = database.get_link_text(text)
         if data:
-            battons = []
-            for i in data:
-                battons.append([InlineKeyboardButton(f"{i[6]}", callback_data=f"{i[0]}")])
-            bat = InlineKeyboardMarkup(battons)
+            music_start_search = [0]
+            textlar.append(text)
+            start = music_start_search[-1]
+            bat = test_0(start,data)
             context.bot.send_message(chat_id=update.effective_chat.id,
-                                     text="<b>Siz kiritgan so'zlar qatnashgan linklar quyidagilar:)</b>",
-                                     parse_mode="HTML",
-                                     reply_markup=bat)
+                                     text=bat[1],
+                                     reply_markup=bat[0])
+            return 15
         else:
             context.bot.send_message(chat_id=update.effective_chat.id,
                                      text="Siz kiritgan so'zlar qatnashgan linklar Afsuski topilmadi!",
@@ -522,7 +576,7 @@ def fallback_text(update, context):
 
 
 def all_user(update, context):
-    all_user = database.get_users()[:50]
+    all_user = database.get_users()[-50:]
     all_text = "{:<1} || {:<8} || {:<23}\n\n".format("Number", "Name", "Username")
     for item in all_user:
         try:
@@ -533,3 +587,13 @@ def all_user(update, context):
                              text=all_text,
                              parse_mode="HTML",
                              reply_markup=about)
+
+def developer(update, context):
+    try:
+        now = datetime.today()
+        res = (now - datetime(2000,11,25)).days // 365 + 1
+        a = context.bot.send_message(chat_id=update.effective_chat.id,
+                                     text=f"<b>About developer:\n\nFull Name: Akbar Haydarov\nAge: {res}\nMa'lumoti: TATU 3-kurs\nUsername: @Akbar_TUIT\n...!</b>",
+                                     parse_mode="HTML")
+    except Exception as e:
+        print(e)

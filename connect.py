@@ -34,7 +34,7 @@ class Database:
     def get_link_text(self,text):
         connection = sqlite3.connect(db)
         cursor = connection.cursor()
-        cursor.execute(f'SELECT * FROM linklar WHERE name LIKE "%{text}%"')
+        cursor.execute(f'SELECT * FROM linklar WHERE name LIKE "%{text}%" OR text LIKE "%{text}%"')
         a = cursor.fetchall()
         connection.close()
         return a
@@ -56,11 +56,14 @@ class Database:
         return b
 
     def set_user(self, name, userID, username):
-        connection = sqlite3.connect(db)
-        cursor = connection.cursor()
-        cursor.execute(f'INSERT INTO users(name,userID,username) VALUES("{name}",{userID},"{username}")')
-        connection.commit()
-        connection.close()
+        try:
+            connection = sqlite3.connect(db)
+            cursor = connection.cursor()
+            cursor.execute(f'INSERT INTO users(name,userID,username) VALUES("{name}",{userID},"{username}")')
+            connection.commit()
+            connection.close()
+        except Exception:
+            pass
 
     def set_link(self, text, photo, link, user, date, name, category_id):
         try:
@@ -113,7 +116,6 @@ class Database:
             cursor = connection.cursor()
             cursor.execute(f"DELETE FROM linklar WHERE id={id}")
             connection.commit()
-            # print("shu joyga keldi!")
             connection.close()
             return True
         except Exception:
@@ -130,14 +132,3 @@ class Database:
         except Exception:
             return False
 
-
-if __name__ == '__main__':
-    # dbs = Database()
-    # # print(dbs.get_link())
-    # dbs.set_link('aaa','','asdasda','asdas','a123123','bbbbb',1)
-    # s = 0
-    # n = 12
-    # for i in range(n, 2 * n):
-    #     s += (n + i) ** 3
-    # print(s)
-    a = 12;b=13;c = 1123;print(a,b,c)
