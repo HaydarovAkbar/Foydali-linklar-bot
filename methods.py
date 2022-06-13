@@ -3,6 +3,8 @@ from connect import Database
 from datetime import datetime
 from datetime import timedelta
 import time
+from telegram import Update
+from telegram.ext import CallbackContext
 
 date = "20:10:2021"
 database = Database()
@@ -319,7 +321,7 @@ def inline_funcion(update, context):
         global cat_list
         if query.data == "chapga":
             if music_start[-1] == 0:
-                return sub_message_delete(update, context)
+                query.answer(text="Siz allaqachon ro'yxat boshidasiz!!!")
             else:
                 mus = music_start[-1]
                 music_start.append(mus - 10)
@@ -335,7 +337,7 @@ def inline_funcion(update, context):
             if not a:
                 mus = music_start[-1]
                 music_start.append(mus - 10)
-                return add_message_delete(update, context)
+                query.answer(text="Siz allaqachon ro'yxat oxiridasiz!!!")
             query.edit_message_text(text=a[1], reply_markup=a[0])
         else:
             query.edit_message_text(text="✅")
@@ -508,7 +510,9 @@ def admin_lists(update, context):
 
 music_start_search = [0]
 textlar = [""]
-def inline_funcion_search(update, context):
+
+
+def inline_funcion_search(update: Update, context: CallbackContext):
     try:
         query = update.callback_query
         global music_start_search
@@ -517,11 +521,11 @@ def inline_funcion_search(update, context):
         d = database.get_link_text(text)
         if query.data == "chapga":
             if music_start_search[-1] == 0:
-                return sub_message_delete(update, context)
+                query.answer(text="Siz allaqachon ro'yxat boshidasiz!!!")
             else:
                 mus = music_start_search[-1]
                 music_start_search.append(mus - 10)
-                a = test_0(music_start_search[-1],d)
+                a = test_0(music_start_search[-1], d)
                 query.edit_message_text(text=a[1], reply_markup=a[0])
         elif query.data == "delete":
             query.delete_message(timeout=15)
@@ -530,11 +534,11 @@ def inline_funcion_search(update, context):
             mus = music_start_search[-1]
             mus += 10
             music_start_search.append(mus)
-            a = test_0(music_start_search[-1],d)
+            a = test_0(music_start_search[-1], d)
             if not a:
                 mus = music_start_search[-1]
                 music_start_search.append(mus - 10)
-                return add_message_delete(update, context)
+                query.answer(text="Siz allaqachon ro'yxat oxiridasiz!!!")
             query.edit_message_text(text=a[1], reply_markup=a[0])
         else:
             query.edit_message_text(text="✅")
@@ -550,6 +554,7 @@ def inline_funcion_search(update, context):
     except Exception as e:
         return 1
 
+
 def fallback_text(update, context):
     global textlar
     global music_start_search
@@ -560,7 +565,7 @@ def fallback_text(update, context):
             music_start_search = [0]
             textlar.append(text)
             start = music_start_search[-1]
-            bat = test_0(start,data)
+            bat = test_0(start, data)
             context.bot.send_message(chat_id=update.effective_chat.id,
                                      text=bat[1],
                                      reply_markup=bat[0])
@@ -587,10 +592,11 @@ def all_user(update, context):
                              parse_mode="HTML",
                              reply_markup=about)
 
+
 def developer(update, context):
     try:
         now = datetime.today()
-        res = (now - datetime(2000,11,25)).days // 365 + 1
+        res = (now - datetime(2000, 11, 25)).days // 365 + 1
         a = context.bot.send_message(chat_id=update.effective_chat.id,
                                      text=f"<b>About developer:\n\nFull Name: Akbar Haydarov\nAge: {res}\nMa'lumoti: TATU 3-kurs\nUsername: @Akbar_TUIT\n...!</b>",
                                      parse_mode="HTML")

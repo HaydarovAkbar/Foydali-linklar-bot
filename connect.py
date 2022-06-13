@@ -11,7 +11,8 @@ class Database:
         a = cursor.fetchall()
         connection.close()
         return a
-    def get_link_userID(self,id):
+
+    def get_link_userID(self, id):
         try:
             connection = sqlite3.connect(db)
             cursor = connection.cursor()
@@ -21,7 +22,8 @@ class Database:
             return a
         except Exception as e:
             print(e)
-    def get_link_catID(self,id):
+
+    def get_link_catID(self, id):
         try:
             connection = sqlite3.connect(db)
             cursor = connection.cursor()
@@ -31,7 +33,8 @@ class Database:
             return a
         except Exception as e:
             print(e)
-    def get_link_text(self,text):
+
+    def get_link_text(self, text):
         connection = sqlite3.connect(db)
         cursor = connection.cursor()
         cursor.execute(f'SELECT * FROM linklar WHERE name LIKE "%{text}%" OR text LIKE "%{text}%"')
@@ -131,4 +134,3 @@ class Database:
             return a
         except Exception:
             return False
-

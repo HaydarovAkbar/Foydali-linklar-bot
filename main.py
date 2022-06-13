@@ -16,6 +16,7 @@ all_handler = ConversationHandler(
                   MessageHandler(Filters.regex('^(' + boshqa + ')$'), battons4),
                   MessageHandler(Filters.regex('^(' + haqida + ')$'), battons5),
                   MessageHandler(Filters.regex('^(' + add + ')$'), battons6),
+                  MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
                   ],
     states={
         1: [
@@ -72,19 +73,19 @@ all_handler = ConversationHandler(
             MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
             MessageHandler(Filters.text, rek)],
         12: [CommandHandler('start', start),
-            MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
+             MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
              MessageHandler(Filters.regex('^(' + "📝 Text" + ')$'), rek_text1),
              MessageHandler(Filters.regex('^(' + "🎥 Video" + ')$'), rek_Video1),
              MessageHandler(Filters.regex('^(' + "🏞 Photo" + ')$'), rek_photo1),
              ],
         13: [CommandHandler('start', start),
-            MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
+             MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
              MessageHandler(Filters.photo, rek_photo)],
         14: [CommandHandler('start', start),
-            MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
+             MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
              MessageHandler(Filters.video, rek_video)],
         15: [CommandHandler('start', start),
-            CommandHandler('developer', developer),
+             CommandHandler('developer', developer),
              CallbackQueryHandler(inline_funcion_search),
              MessageHandler(Filters.regex('^(' + menyu + ')$'), start),
              MessageHandler(Filters.text, fallback_text)
@@ -101,12 +102,12 @@ all_handler = ConversationHandler(
              ],
     },
     fallbacks=[CommandHandler('start', start),
-        CommandHandler('developer', developer),
-        MessageHandler(Filters.text, fallback_text)]
+               CommandHandler('developer', developer),
+               MessageHandler(Filters.text, fallback_text)]
 )
 
 dispatcher.add_handler(all_handler)
 
 updater.start_polling()
 
-print("started BOT")
+print("started polling")
